@@ -48,10 +48,6 @@ const makeDependenciesGraph = (entry) => {
   return graph
 }
 
-// 函数在闭包内执行，一面污染全局变量
-// 可执行代码code, require中，引入的是相对路径需要做转换
-// 模块执行，声明一个exports，用户储存该模块的导出
-
 const generateCode = (entry) => {
   const graph = JSON.stringify(makeDependenciesGraph(entry))
   return `

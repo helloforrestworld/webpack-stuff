@@ -1,10 +1,5 @@
-import './index.css'
-import styles from './index.module.css'
-import './index.less'
-import stylesLess from './index.module.less'
+import ReactDom from 'react-dom';
+import React from 'react'
+import App from './App'
 
-console.log({ styles, stylesLess })
-
-var p = document.createElement('p')
-p.innerHTML = '给你买个橘子1！'
-document.body.append(p)
+ReactDom.render(<App />, document.getElementById('root'))

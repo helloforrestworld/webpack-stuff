@@ -11,7 +11,7 @@ const getStyleLoaders = (cssOption, ...args) => {
   let loaders = [
     'style-loader',
     { loader: 'css-loader', options: cssOption },
-    'postcss-loader'
+    'postcss-loader',
   ]
   if (args.length) {
     loaders = [...loaders, ...args]
@@ -20,52 +20,71 @@ const getStyleLoaders = (cssOption, ...args) => {
 }
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index.js'
+    filename: 'index.js',
   },
   module: {
     rules: [
       {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader', 'eslint-loader'],
+      },
+      {
         test: cssRegex,
         exclude: cssModuleRegex,
         use: getStyleLoaders({
-          importLoaders: 1
-        })
+          importLoaders: 1,
+        }),
       },
       {
         test: cssModuleRegex,
         use: getStyleLoaders({
           importLoaders: 1,
           modules: {
-            localIdentName: '[path][name]__[local]--[hash:base64:5]'
-          }
-        })
+            localIdentName: '[path][name]__[local]--[hash:base64:5]',
+          },
+        }),
       },
       {
         test: lessRegex,
         exclude: lessModuleRegex,
         use: getStyleLoaders({
-          importLoaders: 2
-        }, 'less-loader')
+          importLoaders: 2,
+        }, 'less-loader'),
       },
       {
         test: lessModuleRegex,
         use: getStyleLoaders({
           importLoaders: 2,
           modules: {
-            localIdentName: '[path][name]__[local]--[hash:base64:5]'
-          }
-        }, 'less-loader')
-      }
-    ]
+            localIdentName: '[path][name]__[local]--[hash:base64:5]',
+          },
+        }, 'less-loader'),
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './public/index.html')
+      template: path.resolve(__dirname, './public/index.html'),
     }),
-    new CleanWebpackPlugin()
-  ]
+    new CleanWebpackPlugin(),
+  ],
+  devServer: {
+    port: 3001,
+    overlay: true,
+    contentBase: path.resolve(__dirname, 'dist'),
+    proxy: {
+      changeOrigin: true,
+    },
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
 }

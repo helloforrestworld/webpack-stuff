@@ -8,10 +8,11 @@
     "dev-build": "webpack --mode development",
     "build": "webpack",
     "eslint": "eslint --ext .js,.jsx src",
-    "fix": "eslint --fix --ext .js,.jsx src"
+    "fix": "eslint --fix --ext .js,.jsx src",
+    "foo": "echo \"fooo\" && exit 0",
   },
   "pre-commit": [
-    "eslint"
+    "foo"
   ],
   "author": "",
   "license": "ISC",

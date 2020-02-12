@@ -87,4 +87,5 @@ module.exports = {
       '@': path.resolve(__dirname, 'src'),
     },
   },
+  devtool: 'eval-source-map',
 }

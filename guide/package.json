@@ -6,13 +6,12 @@
   "scripts": {
     "start": "webpack-dev-server",
     "dev-build": "webpack --mode development",
-    "build": "webpack",
+    "build": "webpack --mode production",
     "eslint": "eslint --ext .js,.jsx src",
-    "fix": "eslint --fix --ext .js,.jsx src",
-    "foo": "echo 1"
+    "fix": "eslint --fix --ext .js,.jsx src"
   },
   "pre-commit": [
-    "foo"
+    "eslint"
   ],
   "author": "",
   "license": "ISC",

@@ -1,5 +1,13 @@
-import ReactDom from 'react-dom'
-import React from 'react'
-import App from './App'
+import counter from './counter'
+import constDiv from './const'
+import './index.css'
 
-ReactDom.render(<App />, document.getElementById('root'))
+counter()
+constDiv()
+
+if (module.hot) {
+  module.hot.accept('./const.js', () => {
+    document.getElementById('const').remove()
+    constDiv()
+  })
+}

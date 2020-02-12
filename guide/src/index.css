@@ -1,10 +1,17 @@
-@import "normalize.css";
-
-body {
-  background: #fcfcfc;
+#counter {
+  cursor: pointer;
+  width: 100px;
+  padding: 20px;
+  margin: 0 auto;
+  border: 1px solid #cccccc;
+  background: rosybrown;
+  color: #fff;
+  text-align: center;
 }
 
-p {
-  transform: translate(100px, 200px);
-  display: flex;
+#const {
+  width: 400px;
+  margin: 0 auto;
+  color: rosybrown;
+  text-align: center;
 }

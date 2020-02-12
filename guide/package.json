@@ -9,6 +9,7 @@
     "build": "webpack",
     "eslint": "eslint --ext .js,.jsx src",
     "fix": "eslint --fix --ext .js,.jsx src",
+    "foo": "echo 1"
   },
   "pre-commit": [
     "foo"

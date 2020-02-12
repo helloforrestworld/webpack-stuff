@@ -23,7 +23,7 @@
   ],
   "rules": {
     "react/jsx-filename-extension": 0,
-    "semi": [1, "never"],
+    "semi": [2, "never"],
     "react/prefer-stateless-function": 0
   }
 }

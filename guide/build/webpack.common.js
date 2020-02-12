@@ -20,10 +20,9 @@ const getStyleLoaders = (cssOption, ...args) => {
 }
 
 module.exports = {
-  mode: 'development',
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '../dist'),
     filename: 'index.js',
   },
   module: {
@@ -69,23 +68,14 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './public/index.html'),
+      template: path.resolve(__dirname, '../public/index.html'),
     }),
     new CleanWebpackPlugin(),
   ],
-  devServer: {
-    port: 3001,
-    overlay: true,
-    contentBase: path.resolve(__dirname, 'dist'),
-    proxy: {
-      changeOrigin: true,
-    },
-  },
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
-  },
-  devtool: 'eval-source-map',
+  }
 }

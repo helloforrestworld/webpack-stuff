@@ -34,6 +34,25 @@ module.exports = {
         use: ['babel-loader', 'eslint-loader'],
       },
       {
+        test: /\.(jpg|png|gif)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 2048, // 小于2kb以DataUrl打包
+            outputPath: 'images/',
+            name: '[name]-[hash].[ext]',
+          },
+        },
+      },
+      {
+        test: /\.(eot|ttf|svg|woff|woff2)$/,
+        loader: 'file-loader',
+        options: {
+          outputPath: 'fonts/',
+          name: '[name]-[hash].[ext]',
+        },
+      },
+      {
         test: cssRegex,
         exclude: cssModuleRegex,
         use: getStyleLoaders({
@@ -87,5 +106,5 @@ module.exports = {
       '@': path.resolve(__dirname, 'src'),
     },
   },
-  devtool: 'eval-source-map',
+  devtool: 'cheap-module-source-map',
 }

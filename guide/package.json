@@ -13,6 +13,9 @@
   "pre-commit": [
     "eslint"
   ],
+  "sideEffects": [
+    "*.css"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -20,11 +23,12 @@
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
+    "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.4.2",
     "cssnano": "^4.1.10",
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0-alpha.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-loader": "^3.0.3",
     "eslint-plugin-import": "^2.20.1",
@@ -35,6 +39,7 @@
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.7.0",
@@ -48,6 +53,7 @@
   "dependencies": {
     "@babel/runtime-corejs3": "^7.8.4",
     "core-js": "^3.6.4",
+    "jquery": "^3.4.1",
     "lodash": "^4.17.15",
     "normalize.css": "^8.0.1",
     "react": "^16.12.0",

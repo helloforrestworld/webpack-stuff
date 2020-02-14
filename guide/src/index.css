@@ -15,3 +15,11 @@
   color: rosybrown;
   text-align: center;
 }
+
+/* 重复代码optimize-css-assets-webpack-plugin会去除 */
+#const {
+  width: 400px;
+  margin: 0 auto;
+  color: rosybrown;
+  text-align: center;
+}

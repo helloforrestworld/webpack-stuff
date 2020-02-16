@@ -1,31 +1,6 @@
 const merge = require('webpack-merge')
-const path = require('path')
-const fs = require('fs')
-const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin')
 const commonConfig = require('./webpack.common')
-
-const plugins = [
-  new MiniCssExtractPlugin({
-    filename: '[name].css',
-    chunkFilename: '[id].css'
-  }),
-]
-
-const files = fs.readdirSync(path.resolve(__dirname, '../dll/'))
-files.forEach(file => {
-  if (/\.dll\.js$/.test(file)) {
-    plugins.push(new AddAssetHtmlWebpackPlugin({
-      filepath: path.resolve(__dirname, '../dll/', file)
-    }))
-  }
-  if (/\.manifest\.json$/.test(file)) {
-    plugins.push(new webpack.DllReferencePlugin({
-      manifest: path.resolve(__dirname, '../dll/', file)
-    }))
-  }
-})
 
 const prodConfig = {
   mode: 'production',
@@ -35,12 +10,37 @@ const prodConfig = {
     filename: '[name]-[contenthash].js',
     chunkFilename: '[name]-[contenthash].js'
   },
-  plugins,
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    }),
+  ],
   optimization: {
     splitChunks: {
-      chunks: 'all'
-    },
-  }
+      chunks: 'all',
+      minSize: 30000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          name: 'vendors'
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+          name: 'common'
+        }
+      }
+    }
+  },
 }
 
 module.exports = merge(commonConfig(true), prodConfig)

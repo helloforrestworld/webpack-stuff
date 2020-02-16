@@ -24,10 +24,25 @@ module.exports = (webpackEnv) => {
     return loaders
   }
 
+  const entry = {
+    index: './src/index.js',
+    list: './src/list.js'
+  }
+
+  const plugins = [
+    new CleanWebpackPlugin(),
+  ]
+
+  Object.keys(entry).forEach(key => {
+    plugins.push(new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, '../public/index.html'),
+      filename: `${key}.html`,
+      chunks: ['vendors', 'common', key]
+    }))
+  })
+
   return {
-    entry: {
-      main: './src/index.js'
-    },
+    entry,
     output: {
       path: path.resolve(__dirname, '../dist'),
       filename: '[name].js',
@@ -74,12 +89,7 @@ module.exports = (webpackEnv) => {
         },
       ],
     },
-    plugins: [
-      new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, '../public/index.html'),
-      }),
-      new CleanWebpackPlugin(),
-    ],
+    plugins,
     resolve: {
       extensions: ['.js', '.jsx'],
       alias: {

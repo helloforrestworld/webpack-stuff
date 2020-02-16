@@ -1,4 +1,15 @@
-import $ from 'jquery'
-import './index.css'
+import React, { Component } from 'react'
+import ReactDom from 'react-dom'
+import _ from 'lodash'
 
-$('body').html($('div').text('jquery'))
+class App extends Component {
+  render() {
+    return (
+      <div>
+        {_.join(['hello', 'world'], '')}
+      </div>
+    )
+  }
+}
+
+ReactDom.render(<App />, document.getElementById('root'))

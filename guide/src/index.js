@@ -1,6 +1,8 @@
 import $ from 'jquery'
 import './index.css'
 
+const jpg = require('./demo.jpg')
+
 const button = document.createElement('button')
 button.textContent = '加载'
 document.body.append(button)
@@ -27,3 +29,7 @@ button.addEventListener('click', () => {
     console.log(chunk)
   })
 })
+
+const img = document.createElement('img')
+img.src = jpg
+document.body.append(img)

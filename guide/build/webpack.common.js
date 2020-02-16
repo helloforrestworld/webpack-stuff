@@ -41,6 +41,25 @@ module.exports = (webpackEnv) => {
           use: ['babel-loader', 'eslint-loader'],
         },
         {
+          test: /\.(gif|png|jpe?g|svg)$/,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 2048
+              }
+            },
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                webp: {
+                  quality: 75
+                }
+              }
+            },
+          ]
+        },
+        {
           test: cssRegex,
           exclude: cssModuleRegex,
           use: getStyleLoaders({
